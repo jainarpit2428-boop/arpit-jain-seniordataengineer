@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arpit Jain — Senior Data Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050A12;
+    --surface: #0B1220;
+    --surface2: #101929;
+    --border: #1a2a40;
+    --accent: #00D4FF;
+    --gold: #F5A623;
+    --text: #E8F4FF;
+    --muted: #6B8BAE;
+    --dim: #344f6b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 0;
+    background: rgba(5,10,18,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: 0.05em; color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-family: 'DM Mono', monospace; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO — centered no-photo layout */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 8rem 0 5rem;
+    text-align: center;
+  }
+  .hero-inner { max-width: 780px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 100px; padding: 0.35rem 1rem;
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: blink 2s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* Big initials avatar */
+  .initials-avatar {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(0,212,255,0.15) 0%, rgba(0,153,204,0.1) 100%);
+    border: 2px solid rgba(0,212,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 2rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem; font-weight: 800;
+    color: var(--accent);
+    position: relative;
+    animation: fadeUp 0.5s ease both;
+  }
+  .initials-avatar::after {
+    content: '';
+    position: absolute; inset: -8px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,212,255,0.1);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1; letter-spacing: -0.02em;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  h1 span { color: var(--accent); }
+  .hero-tagline {
+    font-size: 1.1rem; color: var(--muted);
+    margin: 1.5rem auto 2.5rem; max-width: 580px;
+    font-weight: 300;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-tagline strong { color: var(--text); font-weight: 500; }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; animation: fadeUp 0.6s 0.3s ease both; }
+  .btn-primary {
+    background: var(--accent); color: #050A12;
+    padding: 0.8rem 1.8rem; border-radius: 6px; text-decoration: none;
+    font-family: 'DM Mono', monospace; font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase; transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { background: #33DDFF; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,212,255,0.3); }
+  .btn-secondary {
+    background: transparent; color: var(--muted);
+    padding: 0.8rem 1.8rem; border-radius: 6px; text-decoration: none;
+    font-family: 'DM Mono', monospace; font-size: 0.8rem; letter-spacing: 0.06em;
+    text-transform: uppercase; border: 1px solid var(--border); transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  .stats-bar {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem;
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin: 4rem 0;
+    position: relative; z-index: 1;
+  }
+  .stat { text-align: center; padding: 0.5rem; border-right: 1px solid var(--border); }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: var(--accent); display: block; line-height: 1; margin-bottom: 0.3rem; }
+  .stat-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  section { padding: 5rem 0; position: relative; z-index: 1; }
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  h2 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.8rem,3vw,2.8rem); letter-spacing: -0.02em; margin-bottom: 3rem; }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+  .skill-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; transition: all 0.2s; }
+  .skill-card:hover { border-color: rgba(0,212,255,0.4); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+  .skill-cat { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag { background: rgba(0,212,255,0.06); border: 1px solid rgba(0,212,255,0.15); color: var(--text); padding: 0.25rem 0.7rem; border-radius: 4px; font-size: 0.78rem; font-family: 'DM Mono', monospace; }
+
+  .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .project-header { background: linear-gradient(135deg, #0B1A2E 0%, #0f2040 100%); padding: 2.5rem; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+  .project-header::before { content: ''; position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(0,212,255,0.1) 0%, transparent 70%); }
+  .project-badge { display: inline-block; background: rgba(245,166,35,0.12); border: 1px solid rgba(245,166,35,0.3); color: var(--gold); padding: 0.25rem 0.8rem; border-radius: 4px; font-family: 'DM Mono', monospace; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .project-title { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .project-sub { color: var(--muted); font-size: 0.9rem; }
+  .project-body { padding: 2.5rem; }
+  .project-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-bottom: 2rem; }
+  .p-stat { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; text-align: center; }
+  .p-stat-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+  .p-stat-before { font-size: 0.82rem; color: #FF6B6B; font-family: 'DM Mono', monospace; text-decoration: line-through; margin-bottom: 0.2rem; }
+  .p-stat-after { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 700; color: #4ADE80; }
+  .project-desc { color: var(--muted); margin-bottom: 1.5rem; line-height: 1.8; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+  .pipeline { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto; }
+  .pipeline-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .pipeline-flow { display: flex; align-items: center; gap: 0.5rem; flex-wrap: nowrap; }
+  .p-node { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); border-radius: 6px; padding: 0.5rem 0.9rem; font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--accent); white-space: nowrap; }
+  .p-arrow { color: var(--dim); font-size: 0.9rem; }
+
+  .exp-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; position: relative; overflow: hidden; }
+  .exp-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); }
+  .exp-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem; }
+  .exp-role { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.2rem; }
+  .exp-company { color: var(--accent); font-size: 0.9rem; margin-top: 0.2rem; }
+  .exp-client { color: var(--muted); font-size: 0.85rem; }
+  .exp-date { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--muted); background: var(--surface2); border: 1px solid var(--border); padding: 0.3rem 0.8rem; border-radius: 4px; white-space: nowrap; }
+  .exp-bullets { list-style: none; margin-top: 1rem; }
+  .exp-bullets li { padding: 0.4rem 0 0.4rem 1.2rem; position: relative; color: var(--muted); font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.03); }
+  .exp-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 0.55rem; }
+
+  .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+  .award-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start; transition: all 0.2s; }
+  .award-card:hover { border-color: rgba(245,166,35,0.4); }
+  .award-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .award-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem; margin-bottom: 0.4rem; }
+  .award-desc { color: var(--muted); font-size: 0.82rem; line-height: 1.6; }
+
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+  .cert-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; display: flex; gap: 1rem; align-items: center; transition: all 0.2s; }
+  .cert-card:hover { border-color: rgba(0,212,255,0.3); transform: translateY(-2px); }
+  .cert-icon { width: 44px; height: 44px; background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .cert-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.2rem; }
+  .cert-issuer { color: var(--muted); font-size: 0.78rem; font-family: 'DM Mono', monospace; }
+
+  .contact-section { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 3rem; text-align: center; position: relative; overflow: hidden; }
+  .contact-section::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 400px; height: 300px; background: radial-gradient(ellipse, rgba(0,212,255,0.06) 0%, transparent 70%); pointer-events: none; }
+  .contact-email { font-family: 'DM Mono', monospace; font-size: 1rem; color: var(--accent); margin: 1rem 0 2rem; }
+
+  footer { border-top: 1px solid var(--border); padding: 2rem 0; text-align: center; color: var(--dim); font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; position: relative; z-index: 1; }
+
+  @media (max-width: 768px) {
+    .stats-bar { grid-template-columns: repeat(2,1fr); }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); }
+    .stat:last-child { border-bottom: none; }
+    .project-stats { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <span class="nav-logo">AJ</span>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#project">Project</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#certs">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="initials-avatar">AJ</div>
+      <div class="hero-badge">Available for opportunities</div>
+      <h1>Arpit <span>Jain</span></h1>
+      <p class="hero-tagline">
+        Senior Data Engineer who turns <strong>petabyte-scale chaos</strong> into clean, cost-efficient pipelines — cutting data shuffling from <strong>1.8 TB to 300 GB</strong> and saving up to <strong>70% in cloud infrastructure costs</strong>.
+      </p>
+      <div class="hero-ctas">
+        <a href="mailto:jain.arpit8120@gmail.com" class="btn-primary">✉ Get In Touch</a>
+        <a href="https://www.linkedin.com/in/arpit-jain-20698317a/" target="_blank" class="btn-secondary">↗ LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="stats-bar">
+    <div class="stat"><span class="stat-num">4.7+</span><span class="stat-label">Years Experience</span></div>
+    <div class="stat"><span class="stat-num">1.8TB</span><span class="stat-label">→ 300GB Shuffle Optimized</span></div>
+    <div class="stat"><span class="stat-num">70%</span><span class="stat-label">Infrastructure Cost Cut</span></div>
+    <div class="stat"><span class="stat-num">15B+</span><span class="stat-label">Rows Processed Daily</span></div>
+  </div>
+</div>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Technical Arsenal</div>
+    <h2>Engineering Stack</h2>
+    <div class="skills-grid">
+      <div class="skill-card"><div class="skill-cat">⚡ Languages</div><div class="skill-tags"><span class="tag">PySpark</span><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Databricks SQL</span></div></div>
+      <div class="skill-card"><div class="skill-cat">☁ Cloud & Big Data</div><div class="skill-tags"><span class="tag">Azure Databricks</span><span class="tag">Delta Lake</span><span class="tag">ADLS Gen2</span><span class="tag">Unity Catalog</span><span class="tag">ADF</span></div></div>
+      <div class="skill-card"><div class="skill-cat">🔧 Data Engineering</div><div class="skill-tags"><span class="tag">ETL/ELT</span><span class="tag">Medallion Architecture</span><span class="tag">Data Modeling</span><span class="tag">Batch & Streaming</span></div></div>
+      <div class="skill-card"><div class="skill-cat">⚙ Performance</div><div class="skill-tags"><span class="tag">Spark Tuning</span><span class="tag">Z-Order</span><span class="tag">Deletion Vectors</span><span class="tag">Execution Plans</span><span class="tag">Cost Optimization</span></div></div>
+      <div class="skill-card"><div class="skill-cat">🔁 Orchestration & Dev</div><div class="skill-tags"><span class="tag">Databricks Workflows</span><span class="tag">CI/CD</span><span class="tag">Jenkins</span><span class="tag">Git</span><span class="tag">Bitbucket</span></div></div>
+      <div class="skill-card"><div class="skill-cat">📊 Analytics</div><div class="skill-tags"><span class="tag">Power BI</span><span class="tag">MicroStrategy</span><span class="tag">Jira</span><span class="tag">Confluence</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="project">
+  <div class="container">
+    <div class="section-label">Featured Work</div>
+    <h2>Production Project</h2>
+    <div class="project-card">
+      <div class="project-header">
+        <div class="project-badge">🔥 Production · Supply Chain</div>
+        <div class="project-title">WHS/RTL Real-Time<br>Supply Chain Platform</div>
+        <div class="project-sub">Global Sportswear Brand (Adidas) · Azure Databricks · Medallion Architecture</div>
+      </div>
+      <div class="project-body">
+        <div class="project-stats">
+          <div class="p-stat"><div class="p-stat-label">Daily Data Shuffle</div><div class="p-stat-before">1.8 TB</div><div class="p-stat-after">300 GB</div></div>
+          <div class="p-stat"><div class="p-stat-label">Rows Copied / Day</div><div class="p-stat-before">1.8 Billion</div><div class="p-stat-after">250M</div></div>
+          <div class="p-stat"><div class="p-stat-label">Infra Cost Saved</div><div class="p-stat-before">Baseline</div><div class="p-stat-after">–70%</div></div>
+        </div>
+        <div class="pipeline">
+          <div class="pipeline-label">Data Pipeline Architecture</div>
+          <div class="pipeline-flow">
+            <div class="p-node">WHS/RTL Source</div><div class="p-arrow">→</div>
+            <div class="p-node">Bronze Layer</div><div class="p-arrow">→</div>
+            <div class="p-node">Silver Layer</div><div class="p-arrow">→</div>
+            <div class="p-node">Gold KPIs</div><div class="p-arrow">→</div>
+            <div class="p-node">Power BI / BI Layer</div>
+          </div>
+        </div>
+        <p class="project-desc">Architected and owned end-to-end distributed PySpark ETL pipelines on Azure Databricks for a global sportswear brand's Retail and Wholesale supply chain data. The 1.8 TB table (15 billion rows and growing) processes daily wholesale and retail datasets using medallion architecture. Achieved massive performance gains by applying Z-Order clustering, Deletion Vectors, and deep Spark execution plan optimization — reducing daily shuffle from 1.8 TB to 300 GB and rows copied from 1.8 billion to 250 million.</p>
+        <div class="project-tech">
+          <span class="tag">Azure Databricks</span><span class="tag">PySpark</span><span class="tag">Delta Lake</span><span class="tag">Z-Order</span><span class="tag">Deletion Vectors</span><span class="tag">Unity Catalog</span><span class="tag">ADLS Gen2</span><span class="tag">Power BI</span><span class="tag">Databricks Workflows</span><span class="tag">Jenkins</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Career</div>
+    <h2>Professional Journey</h2>
+    <div class="exp-card">
+      <div class="exp-top">
+        <div>
+          <div class="exp-role">Senior Data Engineer</div>
+          <div class="exp-company">LTM Limited</div>
+          <div class="exp-client">Client: Adidas · Noida, India</div>
+        </div>
+        <div class="exp-date">Aug 2021 – Present</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Architected and owned distributed PySpark ETL pipelines on Azure Databricks processing multi-terabyte retail and e-commerce datasets daily using the Medallion Architecture.</li>
+        <li>Optimized a 1.8 TB / 15 billion row real-time WHS/RTL supply chain pipeline — reduced daily shuffle from 1.8 TB to 300 GB and rows copied from 1.8B to 250M using Z-Order, Deletion Vectors, and Spark tuning.</li>
+        <li>Achieved 60–70% infrastructure cost reduction and 1–2 hour runtime improvements per pipeline run.</li>
+        <li>Delivered end-to-end pipelines across Retail, Wholesale, and E-commerce domains enabling 5+ critical business KPI areas.</li>
+        <li>Migrated 200+ legacy SQL scripts to Spark SQL on Databricks and engineered Delta tables with final-layer views for Power BI reporting.</li>
+        <li>Maintained and enhanced 10+ production pipelines orchestrated via Databricks Workflows ensuring data correctness and stability.</li>
+        <li>Automated manual data ingestion processes, driving significant reduction in operational effort and engineering efficiency.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Recognition</div>
+    <h2>Awards</h2>
+    <div class="awards-grid">
+      <div class="award-card"><div class="award-icon">🏆</div><div><div class="award-title">Hi-Five Award</div><div class="award-desc">Recognized for designing and implementing scalable data ingestion solutions for GSCM, resulting in client satisfaction and appreciation.</div></div></div>
+      <div class="award-card"><div class="award-icon">⭐</div><div><div class="award-title">Super Crew Award</div><div class="award-desc">Honoured for independently delivering Demand & OTIF development with exceptional quality and strong team collaboration.</div></div></div>
+      <div class="award-card"><div class="award-icon">🎯</div><div><div class="award-title">Spot-On A Team Award</div><div class="award-desc">Awarded for successfully automating manual data ingestion processes, driving significant effort reduction and operational efficiency.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="container">
+    <div class="section-label">Credentials</div>
+    <h2>Certifications</h2>
+    <div class="certs-grid">
+      <div class="cert-card"><div class="cert-icon">🏅</div><div><div class="cert-name">Databricks Certified Data Engineer</div><div class="cert-issuer">Databricks · Data Engineering, PySpark, Delta Lake</div></div></div>
+      <div class="cert-card"><div class="cert-icon">🏅</div><div><div class="cert-name">Databricks Accredited Lakehouse Fundamentals</div><div class="cert-issuer">Databricks · Lakehouse Architecture, Delta Lake</div></div></div>
+      <div class="cert-card"><div class="cert-icon">🏅</div><div><div class="cert-name">Unity Catalog Delivery Specialization</div><div class="cert-issuer">Databricks · Unity Catalog, Data Governance, Access Control</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-section">
+      <div class="section-label" style="justify-content:center;">Let's Connect</div>
+      <h2 style="margin-bottom:0.5rem;">Open to New Opportunities</h2>
+      <p style="color:var(--muted);margin-bottom:1.5rem;">Senior Data Engineer · Azure Databricks · PySpark · Delta Lake</p>
+      <div class="contact-email">jain.arpit8120@gmail.com</div>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="mailto:jain.arpit8120@gmail.com" class="btn-primary">✉ Send Email</a>
+        <a href="https://www.linkedin.com/in/arpit-jain-20698317a/" target="_blank" class="btn-secondary">↗ LinkedIn Profile</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">© 2025 Arpit Jain · Senior Data Engineer · Built with precision</div>
+</footer>
+
+</body>
+</html>
